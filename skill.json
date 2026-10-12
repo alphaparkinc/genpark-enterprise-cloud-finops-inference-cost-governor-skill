@@ -1,0 +1,54 @@
+{
+  "name": "genpark-enterprise-cloud-finops-inference-cost-governor-skill",
+  "version": "1.0.0",
+  "description": "Enterprise Cloud FinOps & Multi-Model LLM Inference Cost Governor. Monitors tenant token burn rates across Tencent Cloud and multi-model runtimes, routes queries across Flash-Lite, Flash, and Pro reasoning tiers based on task complexity and budget ceilings, and enforces automated cost circuit breakers.",
+  "homepage": "https://www.genpark.ai",
+  "linkedin": "https://www.llinkedin.com/company/92955550",
+  "tools": [
+    {
+      "name": "govern_cloud_inference_finops",
+      "description": "Route agent queries to cost-optimal LLM tiers, calculate token inference cost, and enforce tenant FinOps budget limits.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "route_and_govern_inference",
+              "get_tenant_finops_report"
+            ],
+            "description": "Cloud FinOps governance action."
+          },
+          "tenant_id": {
+            "type": "string",
+            "description": "Enterprise department or tenant ID."
+          },
+          "task_complexity": {
+            "type": "string",
+            "enum": [
+              "SIMPLE_LOOKUP",
+              "STANDARD_WORKFLOW",
+              "DEEP_ARCHITECTURAL_REASONING"
+            ],
+            "description": "Complexity tier of task."
+          },
+          "estimated_input_tokens": {
+            "type": "integer",
+            "description": "Input prompt token count."
+          },
+          "estimated_output_tokens": {
+            "type": "integer",
+            "description": "Expected completion token count."
+          },
+          "daily_budget_usd": {
+            "type": "number",
+            "description": "Tenant daily spend limit in USD."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      }
+    }
+  ]
+}
